@@ -17,7 +17,6 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
-        // return view('auth.login');
         return view('admin.auth.login');
     }
 
@@ -26,11 +25,11 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
-
-        $request->session()->regenerate();
-        Alert::success('Success', 'You have successfully logged in!');
-        return redirect()->intended(route('dashboard', absolute: false));
+            $request->authenticate();
+            $request->session()->regenerate();
+            Alert::success('Success', 'Login Success');
+            return redirect()->intended(route('admin#dashboard', absolute: false));
+        
     }
 
     /**
@@ -43,7 +42,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
-        Alert::success('Success', 'You have successfully logged out!');
-        return redirect('/');
+
+        return redirect('');
     }
 }

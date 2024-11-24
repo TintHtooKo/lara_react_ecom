@@ -22,5 +22,14 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('superuser'),
             'role' => 'superadmin',
         ]);
+
+        User::factory()->create([
+            'name' => 'User',
+            'email' => 'user@gmail.com',
+            'password' => Hash::make('superuser'),
+            'role' => 'user',
+        ]);
+
+        
     }
 }
