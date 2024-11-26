@@ -1,7 +1,23 @@
-import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import axios from "axios";
+import React, { useContext } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function Nav() {
+  const {user,dispatch} = useContext(AuthContext)
+  const navigate = useNavigate()
+  const logoutHandler = async () => {
+    let res = await axios.post(
+      import.meta.env.VITE_BACKEND_URL + "/user/logout",
+      {},
+      { withCredentials: true }
+    );
+    if (res.status === 200) {
+      dispatch({ type: "LOGOUT" });
+      navigate("/login");
+    }
+  };
   return (
     <>
       <div className="container-fluid">
@@ -71,7 +87,9 @@ export default function Nav() {
           <div className="col-lg-3 col-6 text-right">
             <Link to="/cart" className="btn border">
               <i className="fas fa-shopping-cart text-primary"></i>
-              <span className="badge" style={{color : '#D19C97'}}>0</span>
+              <span className="badge" style={{ color: "#D19C97" }}>
+                0
+              </span>
             </Link>
           </div>
         </div>
@@ -105,30 +123,87 @@ export default function Nav() {
                 id="navbarCollapse"
               >
                 <div className="navbar-nav mr-auto py-0">
-                  <NavLink to={"/"} className={({isActive})=>isActive ? 'nav-item nav-link active' : 'nav-item nav-link'}>
+                  <NavLink
+                    to={"/"}
+                    className={({ isActive }) =>
+                      isActive
+                        ? "nav-item nav-link active"
+                        : "nav-item nav-link"
+                    }
+                  >
                     Home
                   </NavLink>
-                  <NavLink to={"/shop"} className={({isActive})=>isActive ? 'nav-item nav-link active' : 'nav-item nav-link'}>
+                  <NavLink
+                    to={"/shop"}
+                    className={({ isActive }) =>
+                      isActive
+                        ? "nav-item nav-link active"
+                        : "nav-item nav-link"
+                    }
+                  >
                     Shop
                   </NavLink>
-                  <NavLink to={"/contact"} className={({isActive})=>isActive ? 'nav-item nav-link active' : 'nav-item nav-link'}>
+                  <NavLink
+                    to={"/contact"}
+                    className={({ isActive }) =>
+                      isActive
+                        ? "nav-item nav-link active"
+                        : "nav-item nav-link"
+                    }
+                  >
                     Contact
                   </NavLink>
                 </div>
                 <div className="navbar-nav ml-auto py-0">
-                  <NavLink to={'/login'} className={({isActive})=>isActive ? 'nav-item nav-link active' : 'nav-item nav-link'}>
+                 
+                  {
+                    user ? (
+                  <>
+                   <button class="nav-item nav-link">{user?.user?.name}</button>
+                  <button onClick={logoutHandler} className="nav-item nav-link">Logout</button>
+                  </>
+                    ) : (
+                      <>
+                      <NavLink to={'/login'} className={({isActive})=>isActive ? 'nav-item nav-link active' : 'nav-item nav-link'}>
                     Login
                   </NavLink>
                   <NavLink to={'/register'} className={({isActive})=>isActive ? 'nav-item nav-link active' : 'nav-item nav-link'}>
                     Register
                   </NavLink>
+                      </>
+                    )
+                  }
+
+                  {/* <NavLink
+                    to={"/login"}
+                    className={({ isActive }) =>
+                      isActive
+                        ? "nav-item nav-link active"
+                        : "nav-item nav-link"
+                    }
+                  >
+                    Login
+                  </NavLink>
+                  <NavLink
+                    to={"/register"}
+                    className={({ isActive }) =>
+                      isActive
+                        ? "nav-item nav-link active"
+                        : "nav-item nav-link"
+                    }
+                  >
+                    Register
+                  </NavLink>
+                  <button onClick={logoutHandler} className="nav-item nav-link">
+                    Logout
+                  </button> */}
                 </div>
               </div>
             </nav>
-            
           </div>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 }

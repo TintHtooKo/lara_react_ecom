@@ -44,6 +44,18 @@ class AdminController extends Controller
         return back();
     }
 
+    public function userList(){
+        $user = User::select('id','name','email','role','address','phone','provider')
+                    ->where('role','user')
+                    ->when(request('search'),function($query){
+                        $query->whereAny(['name','email','address','phone','provider'],
+                    'like','%'.request('search').'%');
+                    })
+                    ->orderBy('id','desc')
+                    ->paginate(4);
+        return view('admin.userList.userList',compact('user'));
+    }
+
     private function validateAdmin($request){
         $request->validate([
             'name' => 'required',

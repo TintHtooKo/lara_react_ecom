@@ -135,6 +135,10 @@
                         <i class="fa-solid fa-user-secret"></i>
                         <span class="nav-text">Admin List</span></a>
                     </li>
+                    <li><a href="{{route('admin#userList')}}" aria-expanded="false">
+                        <i class="fa-solid fa-user"></i>
+                        <span class="nav-text">User List</span></a>
+                    </li>
                     <li><a href="{{route('admin#category')}}" aria-expanded="false">
                         <i class="fa-solid fa-table-list"></i>
                         <span class="nav-text">Category List</span></a>

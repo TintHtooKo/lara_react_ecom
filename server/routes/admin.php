@@ -24,4 +24,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
         Route::get('detail/{id}',[ContactController::class,'contactDetail'])->name('admin#contactDetail');
         Route::post('read/{id}',[ContactController::class,'contactRead'])->name('admin#contactRead');
     });
+
+    Route::get('userList',[AdminController::class,'userList'])->name('admin#userList');
 });
