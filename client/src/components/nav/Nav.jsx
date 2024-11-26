@@ -116,12 +116,12 @@ export default function Nav() {
                   </NavLink>
                 </div>
                 <div className="navbar-nav ml-auto py-0">
-                  <a href="#" className="nav-item nav-link">
+                  <NavLink to={'/login'} className={({isActive})=>isActive ? 'nav-item nav-link active' : 'nav-item nav-link'}>
                     Login
-                  </a>
-                  <a href="#" className="nav-item nav-link">
+                  </NavLink>
+                  <NavLink to={'/register'} className={({isActive})=>isActive ? 'nav-item nav-link active' : 'nav-item nav-link'}>
                     Register
-                  </a>
+                  </NavLink>
                 </div>
               </div>
             </nav>

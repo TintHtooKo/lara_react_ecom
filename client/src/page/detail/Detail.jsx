@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Detail() {
   return (
@@ -11,7 +12,7 @@ export default function Detail() {
           <h1 class="font-weight-semi-bold text-uppercase mb-3">Shop Detail</h1>
           <div class="d-inline-flex">
             <p class="m-0">
-              <a href="">Home</a>
+            <Link to="/">Home</Link>
             </p>
             <p class="m-0 px-2">-</p>
             <p class="m-0">Shop Detail</p>

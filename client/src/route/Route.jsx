@@ -6,6 +6,8 @@ import Shop from '../page/shop/Shop'
 import Contact from '../page/contact/Contact'
 import Detail from '../page/detail/Detail'
 import Cart from '../page/cart/Cart'
+import Login from '../page/login/Login'
+import Register from '../page/register/Register'
 
 export default function Route() {
     const router = createBrowserRouter([
@@ -32,6 +34,14 @@ export default function Route() {
                 {
                     path : '/cart',
                     element : <Cart/>
+                },
+                {
+                    path : '/login',
+                    element : <Login/>
+                },
+                {
+                    path : '/register',
+                    element : <Register/>
                 }
             ]
         }

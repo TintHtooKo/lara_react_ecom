@@ -100,7 +100,7 @@
                                         <span class="ml-2">Profile </span>
                                     </a>
                                     <a href="" class="dropdown-item">
-                                        <i class="icon-key"></i>
+                                        <i class="icon-key"></i> 
                                         <span class="ml-2">Change Password </span>
                                     </a>
                                     <form action="{{route('logout')}}" method="post">
@@ -135,13 +135,17 @@
                         <i class="fa-solid fa-user-secret"></i>
                         <span class="nav-text">Admin List</span></a>
                     </li>
-                    {{-- <li><a href="{{route('Admin#contact')}}" aria-expanded="false">
+                    <li><a href="{{route('admin#category')}}" aria-expanded="false">
+                        <i class="fa-solid fa-table-list"></i>
+                        <span class="nav-text">Category List</span></a>
+                    </li>
+                    <li><a href="{{route('admin#contact')}}" aria-expanded="false">
                         <i class="fa-solid fa-address-book"></i>
                         <span class="nav-text">Contact List</span>
                         @if ($unreadContact > 0)
                             <span class="bg-danger px-2 py-1 rounded mx-1 text-white">{{$unreadContact}}</span>
                         @endif
-                    </a> --}}
+                    </a>
                     </li>
                     
                 </ul>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Cart() {
   return (
@@ -13,7 +14,7 @@ export default function Cart() {
           </h1>
           <div class="d-inline-flex">
             <p class="m-0">
-              <a href="">Home</a>
+            <Link to="/">Home</Link>
             </p>
             <p class="m-0 px-2">-</p>
             <p class="m-0">Shopping Cart</p>
