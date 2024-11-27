@@ -143,6 +143,10 @@
                         <i class="fa-solid fa-table-list"></i>
                         <span class="nav-text">Category List</span></a>
                     </li>
+                    <li><a href="{{route('admin#product')}}" aria-expanded="false">
+                        <i class="fa-solid fa-folder"></i>
+                        <span class="nav-text">Product List</span></a>
+                    </li>
                     <li><a href="{{route('admin#contact')}}" aria-expanded="false">
                         <i class="fa-solid fa-address-book"></i>
                         <span class="nav-text">Contact List</span>

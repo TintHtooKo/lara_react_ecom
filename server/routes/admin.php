@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
@@ -26,4 +27,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     });
 
     Route::get('userList',[AdminController::class,'userList'])->name('admin#userList');
+
+    Route::group(['prefix'=>'product'],function(){
+        
+        Route::get('add',[ProductController::class,'productAddPage'])->name('admin#productAddPage');
+        Route::post('add',[ProductController::class,'productAdd'])->name('admin#productAdd');
+        Route::get('delete/{id}',[ProductController::class,'productDelete'])->name('admin#productDelete');
+        Route::get('detail/{id}',[ProductController::class,'productDetail'])->name('admin#productDetail');
+        Route::get('{amt?}',[ProductController::class,'productList'])->name('admin#product');
+    });
 });
