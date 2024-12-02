@@ -16,6 +16,7 @@ Route::get('/user', function (Request $request) {
 
 
 Route::get('/category',[CategoryController::class,'category']);
+Route::post('/category/search',[CategoryController::class,'categorySearch']);
 
 Route::post('/contact/create',[ContactController::class,'contact']);
 
@@ -26,3 +27,4 @@ Route::post('/user/logout',[AuthController::class,'logout']);
 
 Route::get('/product',[ProductController::class,'productList']);
 Route::get('/product/detail/{id}',[ProductController::class,'productDetail']);
+Route::post('/product/search',[ProductController::class,'productSearch']);

@@ -12,4 +12,13 @@ class CategoryController extends Controller
         $category = Category::get();
         return response()->json($category);
     }
+
+    public function categorySearch(Request $request){
+        $category = Category::select('products.*')
+                            ->join('products','products.category_id','categories.id')
+                            ->where('categories.id',$request->id)	
+                            ->get();
+        return response()->json($category);
+
+    }
 }

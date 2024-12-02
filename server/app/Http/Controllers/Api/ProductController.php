@@ -22,4 +22,11 @@ class ProductController extends Controller
                             ->find($id);
         return response()->json($product);
     }
+
+    public function productSearch(Request $request){
+        $product = Product::where('products.name','like','%'.$request->name.'%')->get();
+        return response()->json($product);
+    }
+
+
 }

@@ -1,6 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function Home() {
+  const [product,setProduct] = useState([]);
+  useEffect(()=>{
+    let fetchProduct = async() =>{
+      let res = await axios.get(import.meta.env.VITE_BACKEND_URL+'/product');
+      console.log(res.data)
+      setProduct(res.data)
+    }
+    fetchProduct()
+  },[])
   return (
     <>
       <div id="header-carousel" className="carousel slide" data-ride="carousel">
@@ -62,126 +73,59 @@ export default function Home() {
         </div>
       </div>
 
-      <div class="container-fluid pt-5">
-        <div class="text-center mb-4">
-          <h2 class="section-title px-5">
-            <span class="px-2">Trandy Products</span>
+      <div className="container-fluid pt-5">
+        <div className="text-center mb-4">
+          <h2 className="section-title px-5">
+            <span className="px-2">Trandy Products</span>
           </h2>
         </div>
-        <div class="row px-xl-5 pb-3">
-          <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-            <div class="card product-item border-0 mb-4">
-              <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+        <div className="row px-xl-5 pb-3">
+          {
+            product.map((product,index)=>{
+              const image = JSON.parse(product.image);
+              return(
+                <div className="col-lg-3 col-md-6 col-sm-12 pb-1" key={index}>
+            <div className="card product-item border-0 mb-4">
+              <div className="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
                 <img
-                  class="img-fluid w-100"
-                  src="../../../public/img/product-1.jpg"
+                  className="img-fluid w-100"
+                  src={import.meta.env.VITE_BACKEND_URL_ACCESS+'/'+image[0]}
                   alt=""
                 />
               </div>
-              <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
-                <div class="d-flex justify-content-center">
-                  <h6>$123.00</h6>
-                  <h6 class="text-muted ml-2">
-                    <del>$123.00</del>
+              <div className="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                <h6 className="text-truncate mb-3">{product.name}</h6>
+                <div className="d-flex justify-content-center">
+                  <h6>${product.old_price}</h6>
+                  <h6 className="text-muted ml-2">
+                    <del>${product.new_price}</del>
                   </h6>
                 </div>
               </div>
-              <div class="card-footer d-flex justify-content-between bg-light border">
-                <a href="" class="btn btn-sm text-dark p-0">
-                  <i class="fas fa-eye text-primary mr-1"></i>View Detail
-                </a>
-                <a href="" class="btn btn-sm text-dark p-0">
-                  <i class="fas fa-shopping-cart text-primary mr-1"></i>Add To
+              <div className="card-footer d-flex justify-content-between bg-light border">
+                <Link to={`/detail/${product.id}`} className="btn btn-sm text-dark p-0">
+                  <i className="fas fa-eye text-primary mr-1"></i>View Detail
+                </Link>
+                <a href="" className="btn btn-sm text-dark p-0">
+                  <i className="fas fa-shopping-cart text-primary mr-1"></i>Add To
                   Cart
                 </a>
               </div>
             </div>
           </div>
-          <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-            <div class="card product-item border-0 mb-4">
-              <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                <img class="img-fluid w-100" src="img/product-2.jpg" alt="" />
-              </div>
-              <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
-                <div class="d-flex justify-content-center">
-                  <h6>$123.00</h6>
-                  <h6 class="text-muted ml-2">
-                    <del>$123.00</del>
-                  </h6>
-                </div>
-              </div>
-              <div class="card-footer d-flex justify-content-between bg-light border">
-                <a href="" class="btn btn-sm text-dark p-0">
-                  <i class="fas fa-eye text-primary mr-1"></i>View Detail
-                </a>
-                <a href="" class="btn btn-sm text-dark p-0">
-                  <i class="fas fa-shopping-cart text-primary mr-1"></i>Add To
-                  Cart
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-            <div class="card product-item border-0 mb-4">
-              <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                <img class="img-fluid w-100" src="img/product-3.jpg" alt="" />
-              </div>
-              <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
-                <div class="d-flex justify-content-center">
-                  <h6>$123.00</h6>
-                  <h6 class="text-muted ml-2">
-                    <del>$123.00</del>
-                  </h6>
-                </div>
-              </div>
-              <div class="card-footer d-flex justify-content-between bg-light border">
-                <a href="" class="btn btn-sm text-dark p-0">
-                  <i class="fas fa-eye text-primary mr-1"></i>View Detail
-                </a>
-                <a href="" class="btn btn-sm text-dark p-0">
-                  <i class="fas fa-shopping-cart text-primary mr-1"></i>Add To
-                  Cart
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-            <div class="card product-item border-0 mb-4">
-              <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                <img class="img-fluid w-100" src="img/product-4.jpg" alt="" />
-              </div>
-              <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
-                <div class="d-flex justify-content-center">
-                  <h6>$123.00</h6>
-                  <h6 class="text-muted ml-2">
-                    <del>$123.00</del>
-                  </h6>
-                </div>
-              </div>
-              <div class="card-footer d-flex justify-content-between bg-light border">
-                <a href="" class="btn btn-sm text-dark p-0">
-                  <i class="fas fa-eye text-primary mr-1"></i>View Detail
-                </a>
-                <a href="" class="btn btn-sm text-dark p-0">
-                  <i class="fas fa-shopping-cart text-primary mr-1"></i>Add To
-                  Cart
-                </a>
-              </div>
-            </div>
-          </div>
+              )
+            })
+          }
+          
         </div>
       </div>
 
-      <div class="container-fluid offer pt-5">
-        <div class="row px-xl-5">
-          <div class="col-md-6 pb-4">
-            <div class="position-relative bg-secondary text-center text-md-right text-white mb-2 py-5 px-5">
+      <div className="container-fluid offer pt-5">
+        <div className="row px-xl-5">
+          <div className="col-md-6 pb-4">
+            <div className="position-relative bg-secondary text-center text-md-right text-white mb-2 py-5 px-5">
               <img src="img/offer-1.png" alt="" />
-              <div class="position-relative" style={{ zIndex: "1" }}>
+              <div className="position-relative" style={{ zIndex: "1" }}>
                 <h5 class="text-uppercase text-primary mb-3">
                   20% off the all order
                 </h5>

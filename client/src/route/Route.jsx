@@ -32,7 +32,7 @@ export default function Route() {
                 },
                 {
                     path : '/detail/:id',
-                    element : user ? <Detail/> : <Login/>
+                    element : <Detail/>
                 },
                 {
                     path : '/cart',
