@@ -1,11 +1,12 @@
 import axios from "axios";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { AuthContext } from "../../context/AuthContext";
 
 export default function Nav() {
-  const {user,dispatch} = useContext(AuthContext)
+  const {user,dispatch,cartcount} = useContext(AuthContext)
+  const [cartCount, setCartCount] = useState(0); 
   const navigate = useNavigate()
   const logoutHandler = async () => {
     let res = await axios.post(
@@ -18,6 +19,8 @@ export default function Nav() {
       navigate("/login");
     }
   };
+
+
   return (
     <>
       <div className="container-fluid">
@@ -88,7 +91,7 @@ export default function Nav() {
             <Link to="/cart" className="btn border">
               <i className="fas fa-shopping-cart text-primary"></i>
               <span className="badge" style={{ color: "#D19C97" }}>
-                0
+              {cartcount}
               </span>
             </Link>
           </div>

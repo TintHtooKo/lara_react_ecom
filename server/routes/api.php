@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\ProductController;
@@ -28,3 +29,7 @@ Route::post('/user/logout',[AuthController::class,'logout']);
 Route::get('/product',[ProductController::class,'productList']);
 Route::get('/product/detail/{id}',[ProductController::class,'productDetail']);
 Route::post('/product/search',[ProductController::class,'productSearch']);
+
+Route::post('/cart',[CartController::class,'addCart']);
+Route::middleware('auth:sanctum')->get('/cart/count', [CartController::class, 'getCartCount']);
+

@@ -12,7 +12,8 @@ class ProductController extends Controller
         $product = Product::select('categories.name as category','products.*')
                             ->leftJoin('categories','categories.id','products.category_id')
                             ->orderBy('created_at','desc')
-                            ->get();
+                            ->paginate(3);
+
         return response()->json($product);
     }
 
