@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Mail\SendMail;
+use App\Models\User;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ProductController extends Controller
@@ -45,7 +48,11 @@ class ProductController extends Controller
             $data['image'] = json_encode($images);
             
         }
-        Product::create($data);
+        $product = Product::create($data);
+        $user = User::where('role','user')->get();
+        foreach($user as $user){
+            Mail::to($user->email)->send(new SendMail($product));
+        }
         Alert::success('Success', 'Product Added Successfully');
         return to_route('admin#product');
     }
