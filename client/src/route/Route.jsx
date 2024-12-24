@@ -10,6 +10,7 @@ import Login from '../page/login/Login'
 import Register from '../page/register/Register'
 import { AuthContext } from '../context/AuthContext'
 import Error from '../components/404/error'
+import Checkout from '../page/checkout/Checkout'
 
 export default function Route() {
     const {user} = useContext(AuthContext)
@@ -36,7 +37,11 @@ export default function Route() {
                 },
                 {
                     path : '/cart',
-                    element : <Cart/>
+                    element : user && <Cart/>
+                },
+                {
+                    path : '/checkout',
+                    element : user && <Checkout/>
                 },
                 {
                     path : '/login',

@@ -15,6 +15,12 @@ Route::get('/user', function (Request $request) {
     ]);
 })->middleware('auth:sanctum');
 
+Route::get('/work', function () {
+    return response()->json([
+        'work' => 'work'
+    ]);
+});
+
 
 Route::get('/category',[CategoryController::class,'category']);
 Route::post('/category/search',[CategoryController::class,'categorySearch']);
@@ -31,5 +37,7 @@ Route::get('/product/detail/{id}',[ProductController::class,'productDetail']);
 Route::post('/product/search',[ProductController::class,'productSearch']);
 
 Route::post('/cart',[CartController::class,'addCart']);
+Route::middleware('auth:sanctum')->get('/see-cart',[CartController::class,'seeCart']);
 Route::middleware('auth:sanctum')->get('/cart/count', [CartController::class, 'getCartCount']);
+Route::middleware('auth:sanctum')->post('/cart/{id}', [CartController::class, 'deleteCart']);
 
